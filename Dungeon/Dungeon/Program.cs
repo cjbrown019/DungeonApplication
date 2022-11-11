@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DungeonLibrary;
 
 namespace Dungeon
 {
@@ -12,6 +13,12 @@ namespace Dungeon
         {
             
             Console.WriteLine(GetRoom());
+
+            Weapon Axe = new Weapon("Axe", 12,1,3,true);
+
+            Console.WriteLine(Axe.ToString);
+
+            
         }
 
         public static string GetRoom()

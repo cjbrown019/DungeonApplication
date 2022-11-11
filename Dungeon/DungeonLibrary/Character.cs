@@ -66,7 +66,12 @@
                 "Max Life: {1}\n" +
                 "Life: {2}\n" +
                 "Block: {3}\n" +
-                "Hit Chance: {4}");
+                "Hit Chance: {4}",
+                Name,
+                MaxLife,
+                Life,
+                Block,
+                HitChance);
         }
 
     }
