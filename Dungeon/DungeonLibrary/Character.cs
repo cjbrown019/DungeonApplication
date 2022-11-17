@@ -17,15 +17,15 @@
             get { return _life; }
             set
             {
-                if (value >= MaxLife)
+                if (value <= MaxLife)
                 {
-                    value = MaxLife;
+                    _life = value;
                 }
-                else
+                else if (value > MaxLife)
                 {
-                    value = _life;
+                    _life = MaxLife;
                 }
-
+                
             }
 
 

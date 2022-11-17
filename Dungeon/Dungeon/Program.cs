@@ -13,7 +13,7 @@ namespace Dungeon
         {
             int score = 0;
             bool playerAlive = true;
-            bool combat = true;
+            
             //make weapon
             Weapon Axe = new Weapon("Axe", 30, 1, 5, true);
 
@@ -46,11 +46,11 @@ namespace Dungeon
             {
                 //Monster Encounter
                 Random random = new Random();
-                Monster Monster = monsterPool[random.Next(monsterPool.Length)];
+                Monster monster = monsterPool[random.Next(monsterPool.Length)];
 
                 string room = GetRoom();
-                
-                bool fightMenu = true;
+                bool combat = true;
+
                 do
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
@@ -59,7 +59,7 @@ namespace Dungeon
 
                     Console.WriteLine(room);
 
-                    Console.WriteLine($"You have encountered a enemy {Monster.Name}");
+                    Console.WriteLine($"You have encountered a enemy {monster.Name}");
 
                     Console.WriteLine("\nDo you?\n1) Attack\n2) Check Monster\n3) Player\n4) Run Away");
                     string answer = Console.ReadLine();
@@ -67,10 +67,14 @@ namespace Dungeon
                     switch (answer)
                     {
                         case "1":
-                            do
+                            Combat.DoAttack(player, monster);
+
+                            System.Threading.Thread.Sleep(300);
+
+                            if (monster.Life > 0)
                             {
-                                //TODO: Add Combat menu
-                            } while (fightMenu);
+                                Combat.DoAttack(monster,player);
+                            }
                             break;
                         case "2":
                             break;
@@ -80,7 +84,7 @@ namespace Dungeon
                             Console.Clear();
                             Console.WriteLine(" ==== Game Over ====");
                             Console.WriteLine($"Score {score}");
-                            gameRun = false;
+                            combat = false;
                             playerAlive = false;
                             break;
                         default:
@@ -88,12 +92,15 @@ namespace Dungeon
                             break;
 
 
-                            if (Monster.Life == 0)
+                            if (monster.Life == 0)
                             {
                                 score += 100;
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine($"{Monster.Name} died");
+                                Console.WriteLine($"{monster.Name} died");
                                 Console.ResetColor();
+                                Thread.Sleep(1000);
+                                Console.Clear();
+                                combat = false;
                             }
 
                     }
