@@ -20,6 +20,7 @@ namespace Dungeon
             //ask for player
             Console.WriteLine("What is your name?\n");
             string playerName = Console.ReadLine();
+            Console.Clear();
 
             Player player = new Player(playerName, 13, 15, 100, 100, Races.Human, Axe);
 
@@ -54,10 +55,22 @@ namespace Dungeon
                 do
                 {
                     Console.ForegroundColor = ConsoleColor.DarkBlue;
-                    Console.WriteLine("----=== Master Dungeon ===----");
+                    Console.WriteLine(@"
+ __| |________________________________________| |__
+(__   ________________________________________   __)
+   | |                                        | |
+   | |                                        | |
+   | |           DUNGEON MASTER               | |
+   | |                                        | |
+ __| |________________________________________| |__
+(__   ________________________________________   __)
+   | |                                        | |");
                     Console.ResetColor();
+                    
+                    
 
-                    Console.WriteLine(room);
+
+                    Console.WriteLine("\n" + room);
 
                     Console.WriteLine($"You have encountered a enemy {monster.Name}");
 
