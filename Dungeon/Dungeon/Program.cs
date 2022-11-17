@@ -11,16 +11,43 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
+            string room = GetRoom();
+            bool gameRun = true;
+            bool fightMenu = true;
+            do
+            {
+                Console.WriteLine("----=== Master Dungeon ===----");
 
-            Console.WriteLine("----=== Master Dungeon ===----");
+                Console.WriteLine(room);
 
-            Console.WriteLine(GetRoom());
+                Console.WriteLine("\nDo you?\n1) Attack\n2) Check Monster\n3) Run Away");
+                string answer = Console.ReadLine();
+
+                switch (answer)
+                {
+                    case "1":
+                        do
+                        {
+                            //TODO: Add Combat menu
+                        } while (fightMenu);
+                        break;
+                    case "2":
+                        break;
+                    case "3":
+                        break;
+                    default:
+                        Console.Clear();
+                        break;
+
+                }
+            } while (gameRun);
+            
         }
 
         public static string GetRoom()
         {
             Random randomNumb = new Random();
-            int roomIndex = randomNumb.Next(0,6);
+            int roomIndex = randomNumb.Next(0,4);
             
             string roomDescription;
             string[] rooms =
