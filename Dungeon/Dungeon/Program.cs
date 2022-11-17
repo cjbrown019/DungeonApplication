@@ -53,7 +53,9 @@ namespace Dungeon
                 bool fightMenu = true;
                 do
                 {
+                    Console.ForegroundColor = ConsoleColor.DarkBlue;
                     Console.WriteLine("----=== Master Dungeon ===----");
+                    Console.ResetColor();
 
                     Console.WriteLine(room);
 
@@ -84,6 +86,15 @@ namespace Dungeon
                         default:
                             Console.Clear();
                             break;
+
+
+                            if (Monster.Life == 0)
+                            {
+                                score += 100;
+                                Console.ForegroundColor = ConsoleColor.Green;
+                                Console.WriteLine($"{Monster.Name} died");
+                                Console.ResetColor();
+                            }
 
                     }
                 } while (combat);
