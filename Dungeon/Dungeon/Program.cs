@@ -18,7 +18,7 @@ namespace Dungeon
             Weapon Axe = new Weapon("Axe", 30, 1, 5, true);
 
             //ask for player
-            Console.WriteLine("What is your name?\n");
+            Console.WriteLine("What is your name?");
             string playerName = Console.ReadLine();
             Console.Clear();
 
@@ -70,7 +70,7 @@ namespace Dungeon
                     
 
 
-                    Console.WriteLine("\n" + room);
+                    Console.WriteLine("\n" + room + "\n");
 
                     Console.WriteLine($"You have encountered a enemy {monster.Name}");
 
