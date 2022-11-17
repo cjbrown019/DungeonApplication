@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    internal class Vampires : Monster
+    public class Vampires : Monster
     {
         public bool Old { get; set; }
         public bool MoreBat { get; set; }

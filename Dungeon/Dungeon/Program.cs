@@ -11,36 +11,84 @@ namespace Dungeon
     {
         static void Main(string[] args)
         {
-            string room = GetRoom();
-            bool gameRun = true;
-            bool fightMenu = true;
+            int score = 0;
+            bool playerAlive = true;
+            bool combat = true;
+            //make weapon
+            Weapon Axe = new Weapon("Axe", 30, 1, 5, true);
+
+            //ask for player
+            Console.WriteLine("What is your name?\n");
+            string playerName = Console.ReadLine();
+
+            Player player = new Player(playerName, 13, 15, 100, 100, Races.Human, Axe);
+
+            //Create Monsters
+            Orcs o1 = new Orcs("Orc Minion", 10, 10, 100, 100, 15, 1, "Ugly gross unhygenic orc.",true,false);
+            Orcs o2 = new Orcs();
+            BugBear bB1 = new BugBear("Bug Bear Lunatic", 16, 17, 100, 100, 30, 1, "A giant hairy crazy humanoid bug bear", true, true);
+            BugBear bB2 = new BugBear();
+            Vampires v1 = new Vampires("Count Vlad",18,15,100,100,30,1,"A old man with a pale face and a large cape.",true,true);
+            Vampires v2 = new Vampires();
+
+
+            //Monster Pool
+
+            Monster[] monsterPool =
+            {
+                o1,o1,o1,
+                o2,o2,
+                bB1,bB1,bB1,
+                v1,v1,v1,
+                v2,v2,v2,v2
+            };
             do
             {
-                Console.WriteLine("----=== Master Dungeon ===----");
+                //Monster Encounter
+                Random random = new Random();
+                Monster Monster = monsterPool[random.Next(monsterPool.Length)];
 
-                Console.WriteLine(room);
-
-                Console.WriteLine("\nDo you?\n1) Attack\n2) Check Monster\n3) Run Away");
-                string answer = Console.ReadLine();
-
-                switch (answer)
+                string room = GetRoom();
+                
+                bool fightMenu = true;
+                do
                 {
-                    case "1":
-                        do
-                        {
-                            //TODO: Add Combat menu
-                        } while (fightMenu);
-                        break;
-                    case "2":
-                        break;
-                    case "3":
-                        break;
-                    default:
-                        Console.Clear();
-                        break;
+                    Console.WriteLine("----=== Master Dungeon ===----");
 
-                }
-            } while (gameRun);
+                    Console.WriteLine(room);
+
+                    Console.WriteLine($"You have encountered a enemy {Monster.Name}");
+
+                    Console.WriteLine("\nDo you?\n1) Attack\n2) Check Monster\n3) Player\n4) Run Away");
+                    string answer = Console.ReadLine();
+
+                    switch (answer)
+                    {
+                        case "1":
+                            do
+                            {
+                                //TODO: Add Combat menu
+                            } while (fightMenu);
+                            break;
+                        case "2":
+                            break;
+                        case "3":
+                            break;
+                        case "4":
+                            Console.Clear();
+                            Console.WriteLine(" ==== Game Over ====");
+                            Console.WriteLine($"Score {score}");
+                            gameRun = false;
+                            playerAlive = false;
+                            break;
+                        default:
+                            Console.Clear();
+                            break;
+
+                    }
+                } while (combat);
+            } while (playerAlive);
+           
             
         }
 
