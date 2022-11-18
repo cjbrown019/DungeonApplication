@@ -20,7 +20,7 @@ namespace DungeonLibrary
         public Vampires()
         {
             Name = "Vampire";
-            HitChance = 10;
+            HitChance = 16;
             Block = 10;
             MaxLife = 100;
             Life = 100;

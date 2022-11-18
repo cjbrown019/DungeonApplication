@@ -16,7 +16,7 @@ namespace DungeonLibrary
             Random rand = new Random();
             int roll = rand.Next(1, 21);
 
-            Thread.Sleep(30);
+            Thread.Sleep(3000);
 
             if (roll <= (attacker.CalcHitChance() - defender.CalcBlock()))
             {

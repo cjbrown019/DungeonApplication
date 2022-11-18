@@ -17,12 +17,45 @@ namespace Dungeon
             //make weapon
             Weapon Axe = new Weapon("Axe", 30, 1, 5, true);
 
-            //ask for player
-            Console.WriteLine("What is your name?");
+            //ask for player name
+            Console.WriteLine("What is your characters name?");
             string playerName = Console.ReadLine();
+            
             Console.Clear();
 
-            Player player = new Player(playerName, 13, 15, 100, 100, Races.Human, Axe);
+            //ask for player race
+            Console.WriteLine("Chose your characters race.");
+            Console.WriteLine("" +
+                "1) Human\n" +
+                "2) Orc\n" +
+                "3) Elf");
+            ConsoleKey playerChoice = Console.ReadKey().Key;
+            
+            //Race is chosen
+            Races ChosenRace = new Races();
+            switch (playerChoice)
+            {
+                case ConsoleKey.D1:
+                case ConsoleKey.NumPad1:
+                    ChosenRace = Races.Human;
+                    break;
+                case ConsoleKey.D2:
+                case ConsoleKey.NumPad2:
+                    ChosenRace = Races.Orc;
+                    break;
+                case ConsoleKey.D3:
+                case ConsoleKey.NumPad3:
+                    ChosenRace = Races.Elf;
+                    break;
+            }
+            Console.Clear();
+
+            //Respond
+            Console.WriteLine("You picked {0}",ChosenRace);
+            System.Threading.Thread.Sleep(3000);
+            Console.Clear();
+
+            Player player = new Player(playerName, 13, 15, 100, 100, ChosenRace, Axe);
 
             //Create Monsters
             Orcs o1 = new Orcs("Orc Minion", 10, 10, 100, 100, 15, 1, "Ugly gross unhygenic orc.",true,false);
