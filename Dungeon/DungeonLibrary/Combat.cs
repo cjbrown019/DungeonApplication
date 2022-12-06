@@ -14,11 +14,14 @@ namespace DungeonLibrary
             Console.Clear();
             bool inCombat = true;
             Random rand = new Random();
-            int roll = rand.Next(1, 21);
+            int roll = rand.Next(1, 6);
 
             Thread.Sleep(3000);
 
-            if (roll <= (attacker.CalcHitChance() - defender.CalcBlock()))
+            int atkHC = attacker.CalcHitChance();
+            int defendCB = defender.CalcBlock();
+
+            if (roll + attacker.CalcHitChance() <= defender.CalcBlock())
             {
                 int damageDealt = attacker.CalcDamage();
                 defender.Life -= damageDealt;

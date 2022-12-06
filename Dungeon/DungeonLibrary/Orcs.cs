@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    public class Orcs : Monster
+    public sealed class Orcs : Monster
     {
         public bool Strong { get; set; }
         public bool ThickSkin { get; set; }
