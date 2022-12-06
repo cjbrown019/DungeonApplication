@@ -1,6 +1,6 @@
 ﻿namespace DungeonLibrary
 {
-    public class Character
+    public abstract class Character
     {
         private int _life;
 

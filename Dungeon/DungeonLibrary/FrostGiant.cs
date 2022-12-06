@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DungeonLibrary
 {
-    internal class FrostGiant : Monster
+    internal sealed class FrostGiant : Monster
     {
         public bool Old { get; set; }
         public bool ThickSkin { get; set; }
