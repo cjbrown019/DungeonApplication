@@ -20,8 +20,8 @@ namespace DungeonLibrary
         public BugBear()
         {
             Name = "Bug Bear Grunt";
-            HitChance = 45;
-            Block = 25;
+            HitChance = 10;
+            Block = 6;
             MaxLife = 100;
             Life = 100;
             MaxDamage = 35;
@@ -42,7 +42,7 @@ namespace DungeonLibrary
 
             if (Tall)
             {
-                return Block -= 10;
+                return Block += 10;
             }
             else
             {

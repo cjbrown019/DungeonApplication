@@ -20,8 +20,8 @@ namespace DungeonLibrary
         public Orcs()
         {
             Name = "Orc Soldier";
-            HitChance = 30;
-            Block = 10;
+            HitChance = 15;
+            Block = 3;
             MaxLife = 100;
             Life = 100;
             MaxDamage = 20;
@@ -42,10 +42,15 @@ namespace DungeonLibrary
 
             if (ThickSkin)
             {
-                return Block += Block;
+                Random random = new Random();
+                int blockChance = random.Next(20);
+
+                return blockChance + 5;
             }
             else
             {
+                Random random = new Random();
+                int blockChance = random.Next(20);
                 return Block;
             }
             
