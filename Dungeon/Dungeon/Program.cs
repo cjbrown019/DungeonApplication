@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DungeonLibrary;
 
+
 namespace Dungeon
 {
     internal class Program
@@ -13,17 +14,28 @@ namespace Dungeon
         {
             int score = 0;
             bool playerAlive = true;
-            
+            #region Weapons
+            Weapon oldAxe = new Weapon("Old Axe", 30, 1, 3, false);
+            Weapon greatSword = new Weapon("Great Sword", 40, 1, 3, false);
+            Weapon bowAndArrow = new Weapon("Bow and Arrow", 35, 1, 3, false);
+            Weapon handAxe = new Weapon("Hand Axe", 20, 1, 3, false);
+            Weapon shortSword = new Weapon("Short Sword", 36, 1, 3, false);
+            Weapon spear = new Weapon("Spear", 45, 1, 3, false);
+            Weapon fireBall = new Weapon("FireBall", 90, 1, 3, true);
+            Weapon lightning = new Weapon("Lightning", 30, 1, 3, true);
+            Weapon greatAxe = new Weapon("Great Axe", 40, 1, 3, false);
+                #endregion
             //make weapon
-            Weapon Axe = new Weapon("Axe", 25, 1, 5, true);
-            Weapon Sword = new Weapon("Sword", 30, 1, 3, true);
-            Weapon Bow = new Weapon("Bow", 15, 1, 3, true);
+            Weapon[] weapons = new Weapon[]
+            {
+                oldAxe, greatSword, bowAndArrow, handAxe, shortSword, spear, fireBall, lightning, greatAxe
+            };
             //ask for player name
             Console.WriteLine("What is your characters name?");
             string playerName = Console.ReadLine();
             
             Console.Clear();
-
+            
             //ask for player race
             Console.WriteLine("Chose your characters race.");
             Console.WriteLine("" +
@@ -33,64 +45,68 @@ namespace Dungeon
             ConsoleKey playerChoice = Console.ReadKey().Key;
             
             //Race is chosen
-            Races ChosenRace = new Races();
+            Races chosenRace = new Races();
             switch (playerChoice)
             {
                 case ConsoleKey.D1:
                 case ConsoleKey.NumPad1:
-                    ChosenRace = Races.Human;
+                    chosenRace = Races.Human;
                     break;
                 case ConsoleKey.D2:
                 case ConsoleKey.NumPad2:
-                    ChosenRace = Races.Orc;
+                    chosenRace = Races.Orc;
                     break;
                 case ConsoleKey.D3:
                 case ConsoleKey.NumPad3:
-                    ChosenRace = Races.Elf;
+                    chosenRace = Races.Elf;
                     break;
             }
             Console.Clear();
 
             //ask for player race
-            Console.WriteLine("Chose your characters race.");
-            Console.WriteLine("" +
-                "1) Human\n" +
-                "2) Orc\n" +
-                "3) Elf");
-            ConsoleKey playerChoiceWeapon = Console.ReadKey().Key;
-
-            //Race is chosen
-            
-            switch (playerChoice)
+            Weapon chosenWeapon = new Weapon();
+            Console.WriteLine("Chose your characters weapon.");
+            int index = 0;
+            foreach (Weapon item in weapons)
             {
-                case ConsoleKey.D1:
-                case ConsoleKey.NumPad1:
-                    ChosenRace = Races.Human;
-                    break;
-                case ConsoleKey.D2:
-                case ConsoleKey.NumPad2:
-                    ChosenRace = Races.Orc;
-                    break;
-                case ConsoleKey.D3:
-                case ConsoleKey.NumPad3:
-                    ChosenRace = Races.Elf;
-                    break;
+                index++;
+                Console.WriteLine($"{index}) {item.Name}");
             }
-            Console.Clear();
+            bool weaponIsChosen = false;
+
+            do
+            {
+                string weaponChoice = Console.ReadLine();
+                if (Int32.Parse(weaponChoice) <= weapons.Length)
+                {
+                    chosenWeapon = weapons[Int32.Parse(weaponChoice)-1];
+                    
+                    
+                    
+                    weaponIsChosen = true;
+                }
+                Console.Clear();
+            } while (!weaponIsChosen);
+
+            //weapon is chosen
+
+
+            Player player = new Player(playerName, 10, 15, 100, 100, chosenRace, chosenWeapon);
 
             //Respond
-            Console.WriteLine("You picked {0}",ChosenRace);
-            System.Threading.Thread.Sleep(3000);
+            Console.WriteLine($"You are {player.Name} a {player.Races} holding a {player.EquipedWeapon.Name}. \n");
+            EnterClass.EnterToContinue();
+
             Console.Clear();
 
-            Player player = new Player(playerName, 17, 9, 100, 100, ChosenRace, Axe);
+            
 
             //Create Monsters
-            Orcs o1 = new Orcs("Orc Minion", 10, 10, 100, 100, 15, 1, "Ugly gross unhygenic orc.",true,false);
+            Orcs o1 = new Orcs("Orc Minion", 13, 7, 100, 100, 15, 1, "Ugly gross unhygenic orc.",true,false);
             Orcs o2 = new Orcs();
-            BugBear bB1 = new BugBear("Bug Bear Lunatic", 16, 17, 100, 100, 30, 1, "A giant hairy crazy humanoid bug bear", true, true);
+            BugBear bB1 = new BugBear("Bug Bear Lunatic", 14, 4, 100, 100, 30, 1, "A giant hairy crazy humanoid bug bear", true, true);
             BugBear bB2 = new BugBear();
-            Vampires v1 = new Vampires("Count Vlad",18,15,100,100,30,1,"A old man with a pale face and a large cape.",true,true);
+            Vampires v1 = new Vampires("Count Vlad",18,8,100,100,30,1,"A old man with a pale face and a large cape.",true,true);
             Vampires v2 = new Vampires();
 
 
@@ -143,7 +159,7 @@ namespace Dungeon
                         case "1":
                             Combat.DoAttack(player, monster);
 
-                            System.Threading.Thread.Sleep(300);
+                            Thread.Sleep(300);
 
                             if (monster.Life > 0)
                             {
@@ -192,8 +208,8 @@ namespace Dungeon
             string roomDescription;
             string[] rooms =
             {
-                "In a dark room. The dimensions are unknown due to how dark it is but with the limited\n" +
-                "light you can see 3 statues standing in fron of you. The statues look to be \n" +
+                "You are in a dark room. The dimensions are unknown due to how dark it is but with the limited\n" +
+                "light you can see 3 statues standing in front of you. The statues look to be \n" +
                 "of a knight, archer, and a wizard. Just past the statues is a door lit by two torches.\n" +
                 "The door was a double door made of wood near the handles is what looks like key hole.",
                 "This room is a medium sized, rough diamond, it was once used as a storage room.\n" +

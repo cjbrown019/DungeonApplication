@@ -20,8 +20,8 @@ namespace DungeonLibrary
         public FrostGiant()
         {
             Name = "Frost Giant";
-            HitChance = 10;
-            Block = 10;
+            HitChance = 5;
+            Block = 9;
             MaxLife = 100;
             Life = 100;
             MaxDamage = 50;

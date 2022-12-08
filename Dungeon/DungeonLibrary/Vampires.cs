@@ -42,7 +42,7 @@ namespace DungeonLibrary
 
             if (MoreBat)
             {
-                return Block += Block;
+                return Block + 4;
             }
             else
             {

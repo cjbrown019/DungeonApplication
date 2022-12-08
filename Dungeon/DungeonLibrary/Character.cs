@@ -1,6 +1,8 @@
-﻿namespace DungeonLibrary
+﻿using DungeonInterfaces;
+
+namespace DungeonLibrary
 {
-    public abstract class Character
+    public abstract class Character: Idamagable
     {
         private int _life;
 
@@ -47,12 +49,18 @@
 
         public virtual int CalcBlock()
         {
-            return Block;
+            int blockroll;
+            Random random = new Random();
+            blockroll = random.Next(20);
+            return blockroll + Block;
         }
 
         public virtual int CalcHitChance()
         {
-            return HitChance;
+            int hitroll;
+            Random random = new Random();
+            hitroll = random.Next(20);
+            return hitroll + HitChance;
         }
 
         public virtual int CalcDamage()
