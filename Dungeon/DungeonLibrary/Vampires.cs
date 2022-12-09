@@ -42,11 +42,11 @@ namespace DungeonLibrary
 
             if (MoreBat)
             {
-                return Block + 4;
+                return base.CalcBlock() + 4;
             }
             else
             {
-                return Block;
+                return base.CalcBlock();
             }
 
         }
